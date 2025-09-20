@@ -26,18 +26,86 @@ namespace LinkedList
         /*
          * функционал:
          * 
-         * получить первый элемент
-         * получить последний элемент
+         * получить первый элемент !
+         * получить последний элемент - сам
          * 
-         * удалить первый элемент
-         * удалить последний элемент
-         * удалить элемент по его данным
+         * удалить первый элемент - сам
+         * удалить последний элемент !
+         * удалить элемент по его данным - сам
          * 
-         * проверить наличие элемента
-         * перевернуть
+         * проверить наличие элемента !
+         * перевернуть!
          * 
          */
 
+        public void Reverse()
+        {
+            if (Count <= 1)
+                throw new ArgumentException("количество элементов не достаточно для реверса");
+            
+            Node prev = null;
+            Node current = _head;
+            Node next = null;
+
+            _tail = _head;
+
+            while(current != null)
+            {
+                next = current.Next;
+                current.Next = prev;
+                prev = current;
+                current = next;
+            }
+            _head = prev;
+        }
+        public void RemoveLast()
+        {
+            if(IsEmpty)
+                throw new ArgumentNullException("список пуст");
+            else if(Count == 1)
+                Clear();
+            else
+            {
+                Node current = _head;
+                while(current.Next != _tail)
+                {
+                    current = current.Next;
+                }
+                current.Next = null;
+                _tail = current;
+
+                _count--;
+            }
+
+
+        }
+
+        public string GetFirst()
+        {
+            if (IsEmpty)
+                throw new ArgumentNullException("список пуст");
+            else
+                return _head.Data;
+        }
+
+        public bool Contains(string item)
+        {
+            if(IsEmpty)
+                throw new ArgumentNullException("список пуст");
+            else
+            {
+                Node current = _head;
+                while(current.Next != null)
+                {
+                    if (current.Data == item)
+                    {
+                        return true;
+                    }
+                    current = current.Next;
+                }
+                return false;
+            }
+        }
         public void AddFirst(string text)
         {
             if (text == null)
