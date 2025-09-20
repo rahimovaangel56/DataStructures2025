@@ -7,9 +7,11 @@ namespace DataStructures
         static void Main(string[] args)
         {
             SLinkedList list = new SLinkedList();
-            list.AddFirst("first");
-            list.AddFirst("second");
-            list.AddFirst("three");
+            list.AddFirst("1");
+            list.AddFirst("2");
+            list.AddFirst("3");
+
+            list.InsertAfter("3", "66");
             
             foreach (var i in list)
                 Console.WriteLine(i);
