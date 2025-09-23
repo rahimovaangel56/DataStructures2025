@@ -54,6 +54,31 @@ namespace Search
 
         public static int InterpolateSearch(int key, params int[] values)
         {
+            if (values.Length == 0 || values ==null)
+                return -1;
+
+            int left = 0;
+            int right = values.Length - 1;
+
+            while(left <= right && key >= values[left]&& key <= values[right])
+            {
+                if(left==right)
+                {
+                    if (values[left] == key)
+                        return left;
+                    return -1;
+                }
+                int pos = left + (key - values[left])*(right - left)/
+                    (values[right] - values[left]);
+
+                pos = Math.Clamp(pos, left, right);
+                if (values[pos] == key)
+                    return pos;
+                else if (values[pos] < key)
+                    left = pos + 1;
+                else
+                    right = pos-1;
+            }
             return -1;
         }
     }
