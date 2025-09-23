@@ -4,7 +4,10 @@
     {
         static void Main(string[] args)
         {
-            
+            int key = 65495765;
+            int[] data = GetArray(1000000, key);
+            Console.WriteLine(Search.RecursiveBinarySearch(key, data));
+            Console.WriteLine(Search.LinearSearch(key, data));
         }
 
         static int[] GetArray(int count, int key)

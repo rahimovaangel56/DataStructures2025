@@ -36,10 +36,21 @@ namespace Search
             return -1;
         }
 
-        public static int RecursiveBinarySearch(int key, params int[] values)
+        private static int RecursiveBinarySearch(int key, int left, int right, params int[] values)
         {
-            return -1;
+            if (left > right) //базовый случай остановки рекурсии
+                return -1;
+            int middle = left + (right - left) / 2;
+            if (values[middle] == key)
+                return middle;
+            else if (values[middle] > key)
+                return RecursiveBinarySearch(key, left, middle-1, values);
+            else
+                return RecursiveBinarySearch(key, middle+1, right, values);
         }
+
+        public static int RecursiveBinarySearch(int key, params int[] values) =>
+            RecursiveBinarySearch(key, 0, values.Length -1, values);
 
         public static int InterpolateSearch(int key, params int[] values)
         {
