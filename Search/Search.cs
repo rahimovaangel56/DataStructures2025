@@ -10,12 +10,19 @@ namespace Search
     {
         public static int LinearSearch(int key, params int[] values)
         {
+            int count = 0;
             for (int i = 0; i < values.Length; i++)
             {
-                if(values[i] == key)
+                count++;
+                if (values[i] == key)
+                {
+                    Console.WriteLine($"линейный поиск отработал за {count}");
                     return i;
+
+                }
             }
-            return -1;
+                Console.WriteLine($"линейный поиск отработал за {count}");
+                return -1;
         }
 
         public static int IterativeBinarySearch(int key, params int[] values)
