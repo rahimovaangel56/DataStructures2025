@@ -10,7 +10,7 @@
             foreach (int i in array) 
                 Console.Write(i+" ");
 
-            Sort.QuickSort(array);
+            Sort.MergeSort(array);
 
             Console.WriteLine("\nпосле сортировки:");
 
