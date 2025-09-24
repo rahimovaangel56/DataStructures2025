@@ -61,5 +61,45 @@ namespace Sort
                 data[j + 1] = key;
             }
         }
+
+        public static void QuickSort(int[] data)=>
+            QuickSortReqursive(data, 0, data.Length - 1);
+        private static void QuickSortReqursive(int[] data, int start, int end)
+        {
+            if(start < end)
+            {
+                int pivot = GetPivotIndex(data, start, end);
+                QuickSortReqursive(data, start, pivot -1);
+                QuickSortReqursive(data, pivot + 1, end);
+            }
+        }
+
+        private static int GetPivotIndex(int[] data, int start, int end)
+        {
+            int middle = start + (end - start) / 2;
+            int pivotValue = data[middle];
+            Swap(data, middle, end); //временно опорную точку переместить в конец
+
+            int i = start; //предполагаем что первый элемент больше опорного
+            for( int j = start; j < end; j++ )
+            {
+                if (data[j] <= pivotValue )
+                {
+                    Swap(data, i, j);
+                    i++;
+                }
+            }
+            //перезаписываем опорную точку на нужную позицию
+            Swap(data, i, end);
+            return i;
+        }
+
+        private static void Swap(int[] data, int pos1, int pos2)
+        {
+            int temp = data[pos1];
+            data[pos1] = data[pos2];
+            data[pos2] = temp;
+        }
+
     }
 }
