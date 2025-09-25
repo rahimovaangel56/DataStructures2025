@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.WebSockets;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -42,5 +43,47 @@ namespace Graphs
             node.Neighbors.Clear();
             node = null;
         }
+        #region ОбходВГлубину
+        private void DephtRecursive(Node startNode)
+        {
+            if(startNode == null || vector.Contains(startNode)) return; //базовый случа й
+            vector.Add(startNode);
+            Console.WriteLine(startNode);
+            foreach (Node child in startNode.Neighbors)
+                DephtRecursive(child);
+        }
+        public void Depht(Node startNode = null)
+        {
+            vector = new HashSet<Node>();
+            DephtRecursive(startNode ?? root);
+        }
+        #endregion
+
+        #region ОбходВШиррину
+        public void Width(Node node = null)
+        {
+            Queue<Node> queue = new Queue<Node>();  
+            vector = new HashSet<Node>();
+
+            Node start = node ?? root;
+            queue.Enqueue(start);
+            vector.Add(start);
+
+            while(queue.Count > 0)
+            {
+                Node current = queue.Dequeue();
+                Console.WriteLine(current.Value);
+                foreach (Node child in current.Neighbors)
+                {
+                    if(!vector.Contains(child))
+                    {
+                        vector.Add(child);
+                        queue.Enqueue(child);
+                    }
+                }
+            }
+        }
+
+        #endregion
     }
 }
