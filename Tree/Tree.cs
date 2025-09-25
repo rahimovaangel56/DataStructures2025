@@ -8,7 +8,7 @@ namespace Tree
 {
     internal class Tree
     {
-        public Node Root { get; private set; } //корень дерева
+        public Node Root { get;  set; } //корень дерева
         public Tree()
         {
             Root = null;

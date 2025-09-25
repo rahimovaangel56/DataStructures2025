@@ -6,7 +6,7 @@
         {
             Tree tree = new Tree();
 
-            tree.CreateBalancedTree(5);
+            tree.Root =  tree.CreateBalancedTree(5);
             Console.ReadLine();
         }
     }
