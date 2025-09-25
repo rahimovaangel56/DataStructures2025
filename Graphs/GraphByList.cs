@@ -85,5 +85,44 @@ namespace Graphs
         }
 
         #endregion
+
+        public void AddEdge(Node n1, Node n2)
+        {
+            if(n1 == null || n2 == null) return;
+            if(!n1.Neighbors.Contains(n2))
+                n1.Neighbors.Add(n2);
+            if(!n2.Neighbors.Contains(n1))
+                n2.Neighbors.Add(n1);
+        }
+        public void RemoveEdge(Node n1, Node n2)
+        {
+            if (n1 == null || n2 == null) return;
+            if(n1.Neighbors.Contains(n2))
+                n1.Neighbors.Remove(n2);
+            if(n2.Neighbors.Contains(n1))
+                n2.Neighbors.Remove(n1);
+        }
+
+        private Node FindNodeRecursive(string findValue, Node startNode)
+        {
+            if (startNode == null || vector.Contains(startNode)) return null; //базовый случа й
+            
+            vector.Add(startNode);
+            if(startNode.Value == findValue)
+                return startNode;
+            
+            foreach (Node child in startNode.Neighbors)
+            {
+                Node result = FindNodeRecursive(findValue, child);
+                if (result != null) return result;
+            }
+            return null;
+        }
+        public Node FindNode( string findValue, Node startNode = null)
+        {
+            vector = new HashSet<Node>() ;
+            return FindNodeRecursive(findValue, startNode);
+        }
+
     }
 }
