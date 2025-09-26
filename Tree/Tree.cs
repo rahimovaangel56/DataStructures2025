@@ -81,6 +81,8 @@ namespace Tree
             }
             return minValue;
         }
+        public void DeleteNode(string text)=>
+            DeleteNodeRecursive(Root, text);
 
         #region ОбходДереваRLR
         private void TreeTravelsalRecursive(Node node, List<string> results)
