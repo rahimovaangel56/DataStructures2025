@@ -6,8 +6,19 @@
         {
             Tree tree = new Tree();
 
-            tree.Root =  tree.CreateBalancedTree(5);
-            Console.ReadLine();
+            /* tree.AddNode("Tom");
+             tree.AddNode("Mag");
+             tree.AddNode("Bob");*/
+
+            tree.Root = tree.CreateBalancedTree(5);
+            var result = tree.TreeTraversal();
+
+
+            tree.AddNode("0");
+            foreach (var item in result) 
+                Console.WriteLine(item);
+            Console.ReadKey();
+           
         }
     }
 }

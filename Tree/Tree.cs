@@ -31,6 +31,41 @@ namespace Tree
 
             return root;
         }
+        #region ДобавлениеУзла
+        private Node AddNodeRecursive(Node node, string text)
+        {
+            if(node == null) //базовый случай - не встретилось совпадений
+                return new Node(text);
+            int result = string.Compare(node.Value, text);
+            if(result < 0)
+                node.Left = AddNodeRecursive(node.Left, text);
+            else if( result > 0)
+                node.Right = AddNodeRecursive(node.Right, text);
+
+            return node;
+        }
+        public void AddNode(string text) =>
+            AddNodeRecursive(Root, text);
+        #endregion
+
+        #region ОбходДереваRLR
+        private void TreeTravelsalRecursive(Node node, List<string> results)
+        {
+            if(node!=null)
+            {
+                results.Add(node.Value);
+                TreeTravelsalRecursive(node.Left, results);
+                TreeTravelsalRecursive(node.Right, results);
+            }
+        }
+        public List<string> TreeTraversal()
+        {
+            List<string> results = new List<string>();
+            TreeTravelsalRecursive(Root, results);
+            return results;
+        }
+        #endregion
+
 
     }
 }
