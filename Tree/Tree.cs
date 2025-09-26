@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -45,8 +46,41 @@ namespace Tree
             return node;
         }
         public void AddNode(string text) =>
-            AddNodeRecursive(Root, text);
+            Root = AddNodeRecursive(Root, text);
         #endregion
+
+        #region Удаление узла
+        private Node DeleteNodeRecursive(Node node, string text)
+        {
+            if (node == null) return null;
+            int result = string.Compare(node.Value, text);
+            if(result < 0)
+                node.Left = DeleteNodeRecursive(node.Left, text);
+            else if(result > 0)
+                node.Right = DeleteNodeRecursive(node.Right, text);
+            else //удаление найденного элемента
+            {
+                if (node.Left == null)
+                    return node.Right;
+                else if(node.Right == null)
+                    return node.Left;
+
+                node.Value = FindMinValue(node.Right);
+                node.Right = DeleteNodeRecursive(node.Right, node.Value);
+
+            }
+            return node;
+        }
+        private string FindMinValue(Node node)
+        {
+            string minValue = node.Value;
+            while(node.Left != null)
+            {
+                minValue = node.Left.Value;
+                node = node.Left;
+            }
+            return minValue;
+        }
 
         #region ОбходДереваRLR
         private void TreeTravelsalRecursive(Node node, List<string> results)
@@ -66,6 +100,21 @@ namespace Tree
         }
         #endregion
 
+        #region ПоискУзлаПоЗначению
+        private bool FindNodeRecursive(Node node, string text)
+        {
+            if(node==null) return false;
+            int resurt = string.Compare(node.Value, text);
+            if (resurt == 0)
+                return true;
+            else if (resurt < 0)
+                return FindNodeRecursive(node.Left, text);
+            else
+                return FindNodeRecursive(node.Right, text);
+        }
+        public bool FindNode(string text)=>
+            FindNodeRecursive(Root, text);
 
+        #endregion
     }
 }

@@ -6,16 +6,14 @@
         {
             Tree tree = new Tree();
 
-            /* tree.AddNode("Tom");
+             tree.AddNode("Tom");
              tree.AddNode("Mag");
-             tree.AddNode("Bob");*/
-
-            tree.Root = tree.CreateBalancedTree(5);
-            var result = tree.TreeTraversal();
+             tree.AddNode("Bob");
 
 
-            tree.AddNode("0");
-            foreach (var item in result) 
+            var res = tree.TreeTraversal();
+
+            foreach (var item in res) 
                 Console.WriteLine(item);
             Console.ReadKey();
            
