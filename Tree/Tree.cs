@@ -83,6 +83,7 @@ namespace Tree
         }
         public void DeleteNode(string text)=>
             DeleteNodeRecursive(Root, text);
+        #endregion
 
         #region ОбходДереваRLR
         private void TreeTravelsalRecursive(Node node, List<string> results)
